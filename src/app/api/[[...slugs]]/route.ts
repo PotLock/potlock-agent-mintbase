@@ -1,14 +1,13 @@
 import { searchProject } from "@/utils/search-project";
 import { swagger } from '@elysiajs/swagger';
 import { providers } from 'near-api-js'
-import { EstimateSwapView, Transaction, WRAP_NEAR_CONTRACT_ID, estimateSwap, fetchAllPools, ftGetTokenMetadata, init_env, instantSwap, nearDepositTransaction, nearWithdrawTransaction, percentLess, scientificNotationToString, separateRoutes } from "@ref-finance/ref-sdk"
 import { Elysia } from "elysia";
 import fs from 'fs'
+import path from 'path';
 
 // @ts-ignore
 import Big from 'big.js';
 
-init_env("mainnet")
 
 const app = new Elysia({ prefix: '/api', aot: false })
     .use(swagger())
@@ -88,7 +87,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
             return result;
         }, {});
         const dataWrite = ` export const whitelistedTokens = \n` + JSON.stringify(projectsFilter);
-        const SnapshotFilename = "src/snapshot/projects.ts";
+        const SnapshotFilename = path.join(process.cwd(), 'src/snapshot/projects.ts');
         fs.writeFileSync(SnapshotFilename, dataWrite);
         //projectList.length > 1 && 
         return {
