@@ -148,32 +148,6 @@
           }
         }
       }
-    },
-    "/api/snapshot": {
-      "get": {
-        "description": "Snapshot Data",
-        "operationId": "snapshot",
-        "responses": {
-          "200": {
-            "description": "Snapshot successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "result": {
-                      "type": "array"
-                    }
-                  },
-                  "required": [
-                    "result"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 }
