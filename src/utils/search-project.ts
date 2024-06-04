@@ -23,7 +23,7 @@ export const searchProject = async (query: string): Promise<any[]> => {
         const query = normalize(_query);
 
         const queryTokens = tokenize(query);
-        const tokenScores: ScoredProject[] = [];
+        const projectScores: ScoredProject[] = [];
 
         Object.values(whitelistMetadata).forEach(project => {
             const nameProject = tokenize(project.name);
@@ -31,7 +31,7 @@ export const searchProject = async (query: string): Promise<any[]> => {
             const accountId = tokenize(project.accountId);
             let score = 0;
 
-            // console.log({ nameTokens, symbolTokens, idTokens })
+            // console.log({ nameProject, descriptionProject, accountId })
 
             queryTokens.forEach(queryToken => {
                 const nameMatches = nameProject.filter(nameProject => nameProject.includes(queryToken)).length;
@@ -43,12 +43,12 @@ export const searchProject = async (query: string): Promise<any[]> => {
             });
 
             if (score > 0) {
-                tokenScores.push({ project, score });
+                projectScores.push({ project, score });
             }
         });
 
-        // Sort results by score in descending order and return only the token objects
-        return tokenScores.sort((a, b) => b.score - a.score).map(entry => entry.project);
+        // Sort results by score in descending order and return only the project objects
+        return projectScores.sort((a, b) => b.score - a.score).map(entry => entry.project);
     }
 
     return searchTokens(query);
