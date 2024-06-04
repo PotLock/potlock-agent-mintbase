@@ -1,0 +1,179 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Potlock API",
+    "description": "API for interacting with Potlock operations including projects metadata retrieval and pots.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "x-mb": {
+    "account-id": "mintbase.near",
+    "model": "gpt-4",
+    "instructions": "You are a helpful assistant.",
+    "temperature": 0.5,
+    "tools": [
+      {
+        "type": "generate-transaction"
+      },
+      {
+        "type": "submit-query"
+      }
+    ]
+  },
+  "paths": {
+    "/api/{accountId}": {
+      "get": {
+        "description": "Fetch metadata for a specific accountId.",
+        "operationId": "getAccountIdMetadata",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The accountId identifier for which metadata is being requested."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "accountId metadata retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "index": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "accountId": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "array"
+                    },
+                    "backgroundImage": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "tagline": {
+                      "type": "string"
+                    },
+                    "socialUrl": {
+                      "type": "object"
+                    },
+                    "website": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "index",
+                    "accountId",
+                    "backgroundImage",
+                    "image",
+                    "description",
+                    "tagline",
+                    "socialUrl",
+                    "website",
+                    "tags"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/donate/{accountId}/{quantity}": {
+      "get": {
+        "description": "donate near to prokect.",
+        "operationId": "donateToProject",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The identifier for the project in the donate."
+          },
+          {
+            "in": "path",
+            "name": "quantity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The amount of the input token to donate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Donate to successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "route": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snapshot": {
+      "get": {
+        "description": "Snapshot Data",
+        "operationId": "snapshot",
+        "responses": {
+          "200": {
+            "description": "Snapshot successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "result"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
