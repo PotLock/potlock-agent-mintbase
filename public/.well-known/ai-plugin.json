@@ -14,7 +14,7 @@
     "account-id": "mintbasepotlock.near",
     "assistant": {
       "model": "gpt-4",
-      "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a name  or description , searches for projects or pots in potlock and displays detailed project or pot information . Create smartaction through mintbase when asked to donate",
+      "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a name  or description , searches for projects or pots in potlock and displays detailed project or pot information . Create smartaction through mintbase when asked to donate project or pot",
       "temperature": 0.5,
       "tools": [
         {
