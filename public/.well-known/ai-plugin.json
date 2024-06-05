@@ -150,7 +150,7 @@
     },
     "/api/donate/{accountId}/{quantity}": {
       "get": {
-        "description": "donate near to prokect.",
+        "description": "donate directly to project.",
         "operationId": "donateToProject",
         "parameters": [
           {
