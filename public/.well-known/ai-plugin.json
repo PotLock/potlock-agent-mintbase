@@ -11,16 +11,13 @@
     }
   ],
   "x-mb": {
-    "account-id": "mintbase.near",
+    "account-id": "potlock.near",
     "model": "gpt-4",
-    "instructions": "You are a helpful assistant.",
+    "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a description or name , searches for projects in potlock and displays detailed project information . Create smartaction through mintbase when asked to donate",
     "temperature": 0.5,
     "tools": [
       {
         "type": "generate-transaction"
-      },
-      {
-        "type": "submit-query"
       }
     ]
   },

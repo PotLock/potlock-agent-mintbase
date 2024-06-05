@@ -87,7 +87,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
             return result;
         }, {});
         const dataWrite = ` export const whitelistedTokens = \n` + JSON.stringify(projectsFilter);
-        const SnapshotFilename = path.join(process.cwd(), 'src/snapshot/projects.ts');
+        const SnapshotFilename = 'src/snapshot/projects.ts';
         fs.writeFileSync(SnapshotFilename, dataWrite);
         //projectList.length > 1 && 
         return {
