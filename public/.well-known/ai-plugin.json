@@ -24,10 +24,10 @@
     }
   },
   "paths": {
-    "/api/projectId/{projectId}": {
+    "/api/project/{projectId}": {
       "get": {
-        "description": "Fetch metadata for a specific projectId.",
-        "operationId": "getAccountIdMetadata",
+        "description": "Fetch metadata for a specific project.",
+        "operationId": "getProjectIdMetadata",
         "parameters": [
           {
             "in": "path",
