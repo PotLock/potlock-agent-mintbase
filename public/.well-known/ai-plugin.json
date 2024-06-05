@@ -11,7 +11,7 @@
     }
   ],
   "x-mb": {
-    "account-id": "potlock.near",
+    "account-id": "mintbasepotlock.near",
     "model": "gpt-4",
     "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a description or name , searches for projects in potlock and displays detailed project information . Create smartaction through mintbase when asked to donate",
     "temperature": 0.5,
