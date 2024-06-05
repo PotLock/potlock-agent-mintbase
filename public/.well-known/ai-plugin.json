@@ -7,14 +7,14 @@
   },
   "servers": [
     {
-      "url": "https://potlock-agent-mintbase.vercel.app/"
+      "url": "http://localhost:3000/"
     }
   ],
   "x-mb": {
     "account-id": "mintbasepotlock.near",
     "assistant": {
       "model": "gpt-4",
-      "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a description or name , searches for projects in potlock and displays detailed project information . Create smartaction through mintbase when asked to donate",
+      "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a name  or description , searches for projects or pots in potlock and displays detailed project or pot information . Create smartaction through mintbase when asked to donate",
       "temperature": 0.5,
       "tools": [
         {
@@ -24,7 +24,7 @@
     }
   },
   "paths": {
-    "/api/{accountId}": {
+    "/api/accountId/{accountId}": {
       "get": {
         "description": "Fetch metadata for a specific accountId.",
         "operationId": "getAccountIdMetadata",
@@ -99,11 +99,118 @@
         }
       }
     },
+    "/api/pot/{potId}": {
+      "get": {
+        "description": "Fetch metadata for a specific potId.",
+        "operationId": "getAccountIdMetadata",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "potId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The potId identifier for which metadata is being requested."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "potId metadata retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "project": {
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "project"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/donate/{accountId}/{quantity}": {
       "get": {
         "description": "donate near to prokect.",
         "operationId": "donateToProject",
         "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The identifier for the project in the donate."
+          },
+          {
+            "in": "path",
+            "name": "quantity",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The amount of the input token to donate."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Donate to successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "route": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/donate/pot/{potId}/{accountId}/{quantity}": {
+      "get": {
+        "description": "donate near to prokect.",
+        "operationId": "donateToProject",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "potId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The identifier for the project in the donate."
+          },
           {
             "in": "path",
             "name": "accountId",
