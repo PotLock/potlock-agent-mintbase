@@ -7,7 +7,7 @@ import fs from 'fs'
 
 const app = new Elysia({ prefix: '/api', aot: false })
     .use(swagger())
-    .get("/projectId/:projectId", async ({ params: { projectId } }) => {
+    .get("/project/:projectId", async ({ params: { projectId } }) => {
         const project = await searchProject(projectId)
         return project;
     })
