@@ -26,7 +26,7 @@
   "paths": {
     "/api/project/{projectId}": {
       "get": {
-        "description": "Fetch metadata for a specific project.",
+        "description": "Fetch metadata for a specific project on Potlock.",
         "operationId": "getProjectIdMetadata",
         "parameters": [
           {
@@ -101,7 +101,7 @@
     },
     "/api/pot/{potId}": {
       "get": {
-        "description": "Fetch metadata for a specific potId.",
+        "description": "Fetch metadata for a specific pot on Potlock.",
         "operationId": "getPotIdMetadata",
         "parameters": [
           {
@@ -150,7 +150,7 @@
     },
     "/api/donate/{projectId}/{quantity}": {
       "get": {
-        "description": "donate directly to project.",
+        "description": "donate directly to project on Potlock.",
         "operationId": "donateToProject",
         "parameters": [
           {
@@ -199,7 +199,7 @@
     },
     "/api/donate/pot/{potId}/{projectId}/{quantity}": {
       "get": {
-        "description": "donate project on pot",
+        "description": "donate project to pot on Potlock",
         "operationId": "donateToPot",
         "parameters": [
           {
