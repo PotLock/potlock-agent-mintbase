@@ -28,7 +28,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
                 receiverId: "donate.potlock.near",
                 functionCalls: [
                     {
-                        methodName: "ft_transfer_call",
+                        methodName: "donate",
                         args: {
                             receiver_id: project.accountId,
                         },
