@@ -30,7 +30,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
                     {
                         methodName: "donate",
                         args: {
-                            receiver_id: project.accountId,
+                            recipient_id: project.accountId,
                             bypass_protocol_fee: false,
                             message: "Donate from mintbase wallet",
                         },
