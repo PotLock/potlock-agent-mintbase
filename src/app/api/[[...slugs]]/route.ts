@@ -7,16 +7,16 @@ import fs from 'fs'
 
 const app = new Elysia({ prefix: '/api', aot: false })
     .use(swagger())
-    .get("/accountId/:accountId", async ({ params: { accountId } }) => {
-        const project = await searchProject(accountId)
+    .get("/projectId/:projectId", async ({ params: { projectId } }) => {
+        const project = await searchProject(projectId)
         return project;
     })
     .get("/pot/:potId", async ({ params: { potId } }) => {
         const pot = await searchPot(potId)
         return pot;
     })
-    .get("/donate/:accountId/:quantity", async ({ params: { accountId, quantity }, headers }) => {
-        const projects: any = await searchProject(accountId)
+    .get("/donate/:projectId/:quantity", async ({ params: { projectId, quantity }, headers }) => {
+        const projects: any = await searchProject(projectId)
         if (projects.length === 0) {
             return "project not found"
         }
@@ -37,7 +37,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
         })
         return dataFunc;
     })
-    .get("/donate/pot/:potId/:accountId/:quantity", async ({ params: { potId, accountId, quantity }, headers }) => {
+    .get("/donate/pot/:potId/:projectId/:quantity", async ({ params: { potId, projectId, quantity }, headers }) => {
         if (parseFloat(quantity) < 0.1) {
             return "amount donate have to > 0.1"
         }
@@ -52,7 +52,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
             return `Pot ${potsIsNotRoundLiveArray.join(", ")} not live`
         }
         // check project exist in pot
-        const projects: any = await searchProject(accountId)
+        const projects: any = await searchProject(projectId)
         const projectData = projects.map((project: any) => project.accountId)
         const foundData: any = [];
         pots.forEach((item: any) => {
@@ -80,7 +80,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
                 receiverId: pot.id,
                 functionCalls: [
                     {
-                        methodName: "ft_transfer_call",
+                        methodName: "donate",
                         args: {
                             project_id: pot.project,
                         },
@@ -117,6 +117,7 @@ const app = new Elysia({ prefix: '/api', aot: false })
     //                     const data = {
     //                         index: index,
     //                         accountId: project.id == key && key,
+    //                         projectId: project.id == key && key,
     //                         category: item.profile.category?.text ? [item.profile.category.text] : item.profile.category ? [item.profile.category] : JSON.parse(item.profile.plCategories),
     //                         backgroundImage: item.profile?.backgroundImage ? `https://ipfs.near.social/ipfs/${item.profile.backgroundImage.ipfs_cid}` : '',
     //                         image: item.profile?.image ? `https://ipfs.near.social/ipfs/${item.profile.image.ipfs_cid}` : '',

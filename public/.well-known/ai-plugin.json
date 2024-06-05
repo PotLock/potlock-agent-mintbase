@@ -24,24 +24,24 @@
     }
   },
   "paths": {
-    "/api/accountId/{accountId}": {
+    "/api/projectId/{projectId}": {
       "get": {
-        "description": "Fetch metadata for a specific accountId.",
+        "description": "Fetch metadata for a specific projectId.",
         "operationId": "getAccountIdMetadata",
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
+            "name": "projectId",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "The accountId identifier for which metadata is being requested."
+            "description": "The projectId identifier for which metadata is being requested."
           }
         ],
         "responses": {
           "200": {
-            "description": "accountId metadata retrieved successfully.",
+            "description": "projectId metadata retrieved successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -148,14 +148,14 @@
         }
       }
     },
-    "/api/donate/{accountId}/{quantity}": {
+    "/api/donate/{projectId}/{quantity}": {
       "get": {
         "description": "donate directly to project.",
         "operationId": "donateToProject",
         "parameters": [
           {
             "in": "path",
-            "name": "accountId",
+            "name": "projectId",
             "required": true,
             "schema": {
               "type": "string"
@@ -197,7 +197,7 @@
         }
       }
     },
-    "/api/donate/pot/{potId}/{accountId}/{quantity}": {
+    "/api/donate/pot/{potId}/{projectId}/{quantity}": {
       "get": {
         "description": "donate project on pot",
         "operationId": "donateToPot",
@@ -213,12 +213,12 @@
           },
           {
             "in": "path",
-            "name": "accountId",
+            "name": "projectId",
             "required": true,
             "schema": {
               "type": "string"
             },
-            "description": "The identifier for the accountId in the donate."
+            "description": "The identifier for the projectId in the donate."
           },
           {
             "in": "path",
