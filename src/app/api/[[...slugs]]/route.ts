@@ -3,11 +3,6 @@ import { swagger } from '@elysiajs/swagger';
 import { providers } from 'near-api-js'
 import { Elysia } from "elysia";
 import fs from 'fs'
-import path from 'path';
-
-// @ts-ignore
-import Big from 'big.js';
-
 
 const app = new Elysia({ prefix: '/api', aot: false })
     .use(swagger())
@@ -76,7 +71,6 @@ const app = new Elysia({ prefix: '/api', aot: false })
                     return data[0];
                 })
                 return data[0];
-
             }
             // projectList.push(data)
         });
