@@ -16,6 +16,9 @@ const app = new Elysia({ prefix: '/api', aot: false })
         return pot;
     })
     .get("/donate/:projectId/:quantity", async ({ params: { projectId, quantity }, headers }) => {
+        if (parseFloat(quantity) < 0.1) {
+            return "amount donate have to > 0.1"
+        }
         const projects: any = await searchProject(projectId)
         if (projects.length === 0) {
             return "project not found"
