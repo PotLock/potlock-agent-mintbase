@@ -31,6 +31,8 @@ const app = new Elysia({ prefix: '/api', aot: false })
                         methodName: "donate",
                         args: {
                             receiver_id: project.accountId,
+                            bypass_protocol_fee: false,
+                            message: "Donate from mintbase wallet",
                         },
                         gas: "300000000000000",
                         amount: quantity
@@ -86,6 +88,8 @@ const app = new Elysia({ prefix: '/api', aot: false })
                         methodName: "donate",
                         args: {
                             project_id: pot.project,
+                            bypass_protocol_fee: false,
+                            message: "Donate from mintbase wallet",
                         },
                         gas: "300000000000000",
                         amount: quantity
