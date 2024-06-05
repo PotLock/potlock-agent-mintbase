@@ -102,7 +102,7 @@
     "/api/pot/{potId}": {
       "get": {
         "description": "Fetch metadata for a specific potId.",
-        "operationId": "getAccountIdMetadata",
+        "operationId": "getPotIdMetadata",
         "parameters": [
           {
             "in": "path",
@@ -199,8 +199,8 @@
     },
     "/api/donate/pot/{potId}/{accountId}/{quantity}": {
       "get": {
-        "description": "donate near to prokect.",
-        "operationId": "donateToProject",
+        "description": "donate project on pot",
+        "operationId": "donateToPot",
         "parameters": [
           {
             "in": "path",
@@ -209,7 +209,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The identifier for the project in the donate."
+            "description": "The identifier for the potId in the donate."
           },
           {
             "in": "path",
@@ -218,7 +218,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The identifier for the project in the donate."
+            "description": "The identifier for the accountId in the donate."
           },
           {
             "in": "path",
