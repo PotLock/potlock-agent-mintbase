@@ -7,15 +7,15 @@
   },
   "servers": [
     {
-      "url": "https://potlock-agent-mintbase.vercel.app/"
+      "url": "https://potlock-agent-mintbase.vercel.app"
     }
   ],
   "x-mb": {
     "account-id": "mintbasepotlock.near",
     "assistant": {
-      "model": "gpt-4",
-      "instructions": "You are helpful Public Good Assistant that specializes in Potlock.org . Given a name  or description , searches for projects or pots in potlock and displays detailed project or pot information . Create smartaction through mintbase when asked to donate project or pot",
-      "temperature": 0.5,
+      "name": "Potlock Assistant",
+      "description": "Helps with making donations and getting project and pot data on Potlock.org.  Potlock is the portal for public goods, non-profits, and communities to raise funds transparently on the Near blockchain.",
+      "instructions": "You are helpful assistant that specializes in Potlock.org.  Potlock is the portal for public goods, non-profits, and communities to raise funds transparently on the Near blockchain. Given a name or description, find project details or create donation transactions through your available tools.  In addition to fetching project metadata, you can also look up pot metadata.  Donations can be made to a project directly, or to a project within a pot if specified.  Whenever making a donate transaction only use the first transaction in the array (which will be the closest match) returned from the API.",
       "tools": [
         {
           "type": "generate-transaction"
@@ -135,12 +135,7 @@
                       "type": "array"
                     }
                   },
-                  "required": [
-                    "id",
-                    "name",
-                    "description",
-                    "project"
-                  ]
+                  "required": ["id", "name", "description", "project"]
                 }
               }
             }
@@ -150,7 +145,7 @@
     },
     "/api/donate/{projectId}/{quantity}": {
       "get": {
-        "description": "donate directly to project on Potlock.",
+        "description": "Generate a donation transaction for a specific accountId and quantity.  Returns a Near transaction as a JSON object.",
         "operationId": "donateToProject",
         "parameters": [
           {
@@ -160,7 +155,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The identifier for the project in the donate."
+            "description": "The projectId of the project to donate to."
           },
           {
             "in": "path",
@@ -174,7 +169,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Donate to successfully.",
+            "description": "Donation transaction created successfully for project.",
             "content": {
               "application/json": {
                 "schema": {
@@ -199,7 +194,7 @@
     },
     "/api/donate/pot/{potId}/{projectId}/{quantity}": {
       "get": {
-        "description": "donate project to pot on Potlock",
+        "description": "donate to a project in a pot, rather than directly to the project (better for matching donations).",
         "operationId": "donateToPot",
         "parameters": [
           {
@@ -209,7 +204,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The identifier for the potId in the donate."
+            "description": "The identifier for the potId in the donation."
           },
           {
             "in": "path",
@@ -218,7 +213,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "The identifier for the projectId in the donate."
+            "description": "The identifier for the projectId in the donation."
           },
           {
             "in": "path",
@@ -232,7 +227,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Donate to successfully.",
+            "description": "Donate transaction created successfully for project in pot.",
             "content": {
               "application/json": {
                 "schema": {
